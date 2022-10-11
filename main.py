@@ -4,14 +4,15 @@ import snake
 from food import Food
 from scoreboard import Scoreboard
 
+
+snake = snake.Snake()
+food = Food()
+scoreboard = Scoreboard()
 screen = Screen()
 screen.setup(width=600, height=600)
 screen.bgcolor("black")
 screen.title("My Snake Game")
 screen.tracer(0)
-snake = snake.Snake()
-food = Food()
-scoreboard = Scoreboard()
 screen.listen()
 screen.onkey(snake.up, "Up")
 screen.onkey(snake.left, "Left")
@@ -34,13 +35,16 @@ while game_is_on:
 
     # Detect collision with wall
     if snake.head.xcor() > 285 or snake.head.xcor() < -285 or snake.head.ycor() > 285 or snake.head.ycor() < -285:
-        scoreboard.game_over()
-        game_is_on = False
+        scoreboard.reset()
+        snake.reset_snake()
+
 
     # Detect collision with tail
     for single in snake.turtle_list[1:]:
         if snake.head.distance(single) < 10:
-            scoreboard.game_over()
-            game_is_on = False
+            scoreboard.reset()
+            snake.reset_snake()
+
+
 
 screen.exitonclick()

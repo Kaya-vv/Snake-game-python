@@ -22,6 +22,7 @@ class Snake:
         t = Turtle("square")
         t.penup()
         t.color("white")
+
         t.setpos(pos)
         self.turtle_list.append(t)
 
@@ -55,3 +56,10 @@ class Snake:
 
     def get_snake_pos(self):
         return round(self.head.xcor())
+
+    def reset_snake(self):
+        for turtle in self.turtle_list:
+            turtle.goto(1000, 1000)
+        self.turtle_list.clear()
+        self.create_snake()
+        self.head = self.turtle_list[0]
